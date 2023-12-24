@@ -1,0 +1,29 @@
+1. Settings --> About phone
+2. Tap build number --> 7 times (Changes for custom OS)
+3. Settings --> Developer options --> USB debugging --> ON
+4. Settings --> Developer options --> Default USB configuration --> MIDI / MTP Protocol
+5. Connect the device with laptop/Desktop and in cmd prompt type "adb start-server" and hit enter
+6. Authorize the USB debugging popup in device 
+7. Navigate to cmd prompt --> adb devices 
+8. Ensure device is listed --> <udid> device
+
+For Custom OS devices --> Please do the below changes in Developer Options
+1. Install via USB --> Enabled
+2. USB Debugging (Security Settings) --> Enabled
+3. Verify apps over USB --> Disabled
+4. Verify bytecode of debuggable apps --> Disabled
+5. Force allow apps to write on external devices --> Enabled
+6. Force allow apps on external --> Enabled
+7. Disable permission monitoring --> Enabled
+Note: Check if you have above option and update based on need
+Note: While the script is executing check if you are asked to allow to install the apps. In few devices you need to manually approve the apps to be installed.
+
+Challenges
+1. Till step 5 is success but USB debugging popup is not displayed 
+	Solution 1: Disconnect and connect the USB cable. Ensure Default USB configuration --> MIDI
+	Solution 2: File Explorer --> Right click --> Manage --> Device Manager --> Ensure ADB drivers are installed.
+	Solution 3: Change USB cable with proper one
+	Solution 4: ADB driver are not installed --> Download the drivers and then check it
+	Solution 5: Disconnect usb cable --> cmd prompt --> adb kill-server and adb start-server --> Connect the usb cable
+
+		
