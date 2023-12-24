@@ -1,0 +1,19 @@
+Mandatory desired capabilities for Android
+
+Purpose --> Just to create a session with mobile
+1. platformName --> Android
+2. automationName --> UiAutomator2
+3. deviceName --> Any data of your choice
+
+Purpose --> Create a session with mobile, install the given app and launch the same
+1. platformName --> Android
+2. automationName --> UiAutomator2
+3. deviceName --> Any data of your choice
+4. app --> Path of the APK file in local machine
+
+Purpose --> Create a session with mobile and launch the app that is already installed
+1. platformName --> Android
+2. automationName --> UiAutomator2
+3. deviceName --> Any data of your choice
+4. appPackage --> Name of the app given by developer
+5. appActivity --> screen where the app should land
