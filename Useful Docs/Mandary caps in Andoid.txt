@@ -17,3 +17,9 @@ Purpose --> Create a session with mobile and launch the app that is already inst
 3. deviceName --> Any data of your choice
 4. appPackage --> Name of the app given by developer
 5. appActivity --> screen where the app should land
+
+Purpose --> Create a session with mobile, launch chrome browser
+1. platformName --> Android
+2. automationName --> UiAutomator2
+3. deviceName --> Any data of your choice
+4. browserName --> Chrome
