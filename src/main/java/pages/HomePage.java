@@ -1,9 +1,8 @@
 package pages;
 
-import com.aventstack.extentreports.ExtentTest;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.cucumber.java.en.Given;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import wrappers.GenericWrappers;
@@ -13,15 +12,17 @@ public class HomePage extends GenericWrappers {
     @AndroidFindBy(xpath = "//android.view.View[@text='Rajkumar Ganesan']")
     private WebElement userNameTxt;
 
-    public HomePage(AppiumDriver driver, ExtentTest test) {
-        this.driver = driver;
-        this.node = test;
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-        if (eleIsDisplayed(userNameTxt)) {
-            reportStep("Home page is displayed", "pass");
-        } else {
-            reportStep("Home page is not displayed", "fail");
+    public HomePage() {
+        PageFactory.initElements(new AppiumFieldDecorator(getDriver()), this);
+        if (!eleIsDisplayed(userNameTxt)) {
+            throw new RuntimeException("Home page is not displayed");
         }
+    }
+
+    @Given("Home page is verified")
+    public HomePage verifyHomePage() {
+        eleIsDisplayed(userNameTxt);
+        return this;
     }
 
 }

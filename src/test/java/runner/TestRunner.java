@@ -1,22 +1,18 @@
-package wrappers;
+package runner;
 
+import io.cucumber.testng.CucumberOptions;
+import io.cucumber.testng.CucumberOptions.SnippetType;
 import org.testng.annotations.*;
-import utils.DataInputProvider;
+import wrappers.GenericWrappers;
 
-public class ProjectSpecificWrappers extends GenericWrappers {
+@CucumberOptions(features = {"src/test/resources/features"}, glue = {"pages",
+        "hooks"}, monochrome = true, publish = true, snippets = SnippetType.CAMELCASE, plugin = {"pretty",
+        "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"})
 
-    public String dataSheetName;
-
+public class TestRunner extends GenericWrappers {
     @BeforeSuite
     public void bs() {
         startAppiumServer();
-        initializeReport();
-
-    }
-
-    @BeforeClass
-    public void bc() {
-        initializeTestCase(testCaseName, testDescription);
     }
 
     @Parameters({"platformName", "deviceName", "udid", "appPackage", "appActivity", "automationName",
@@ -28,7 +24,6 @@ public class ProjectSpecificWrappers extends GenericWrappers {
                    @Optional("") String chromeDriverPort, @Optional("") String systemPort, @Optional("") String xcodeOrgId,
                    @Optional("") String xcodeSigningId, @Optional("") String bundleId, @Optional("") String app,
                    @Optional("") String mjpegServerPort, @Optional("") String wdaLocalPort) {
-        initializeTestNodeForEachTC(testNodes);
         launchApp(platformName, deviceName, udid, appPackage, appActivity, automationName, chromeDriverPort, systemPort,
                 xcodeOrgId, xcodeSigningId, bundleId, app, mjpegServerPort, wdaLocalPort);
     }
@@ -38,15 +33,8 @@ public class ProjectSpecificWrappers extends GenericWrappers {
         closeApp();
     }
 
-    @AfterSuite(alwaysRun = true)
+    @AfterSuite
     public void as() {
         stopAppiumServer();
-        saveReport();
     }
-
-    @DataProvider(name = "fetchData")
-    public Object[][] getData() {
-        return DataInputProvider.getSheet(dataSheetName);
-    }
-
 }
