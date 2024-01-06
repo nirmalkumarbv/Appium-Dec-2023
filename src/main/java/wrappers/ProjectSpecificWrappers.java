@@ -9,7 +9,7 @@ public class ProjectSpecificWrappers extends GenericWrappers {
 
     @BeforeSuite
     public void bs() {
-        startAppiumServer();
+//        startAppiumServer();
         initializeReport();
 
     }
@@ -40,7 +40,7 @@ public class ProjectSpecificWrappers extends GenericWrappers {
 
     @AfterSuite(alwaysRun = true)
     public void as() {
-        stopAppiumServer();
+//        stopAppiumServer();
         saveReport();
     }
 
