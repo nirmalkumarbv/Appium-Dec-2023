@@ -5,6 +5,8 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.SupportsContextSwitching;
 import io.appium.java_client.remote.SupportsRotation;
+import io.appium.java_client.service.local.AppiumDriverLocalService;
+import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Pause;
@@ -14,6 +16,7 @@ import org.openqa.selenium.interactions.PointerInput.MouseButton;
 import org.openqa.selenium.interactions.PointerInput.Origin;
 import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import utils.ExtentReporter;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,10 +29,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Set;
 
-public class CommonNativeWrappers {
+public class CommonNativeWrappers extends ExtentReporter {
     public static final int MAX_SCROLL = 10;
     public AppiumDriver driver;
     public boolean useExistingApp = true;
+    public AppiumDriverLocalService service;
+    public AppiumServiceBuilder builder;
+    public String serverURL = "http://0.0.0.0:4723";
 
     // To launch the application (Native/Hybrid)
     public boolean launchApp(String platformName, String deviceName, String udid, String appPackage, String appActivity,
@@ -83,11 +89,11 @@ public class CommonNativeWrappers {
             if (platformName.equalsIgnoreCase("Android")) {
                 // Comment the below line based on need
                 dc.setCapability("autoGrantPermissions", true);
-                driver = new AndroidDriver(new URI("http://0.0.0.0:4723").toURL(), dc);
+                driver = new AndroidDriver(new URI(serverURL).toURL(), dc);
             } else if (platformName.equalsIgnoreCase("iOS")) {
                 // Comment the below line based on need
                 dc.setCapability("autoAcceptAlerts", true);
-                driver = new IOSDriver(new URI("http://0.0.0.0:4723").toURL(), dc);
+                driver = new IOSDriver(new URI(serverURL).toURL(), dc);
             }
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         } catch (Exception e) {
@@ -559,12 +565,13 @@ public class CommonNativeWrappers {
     }
 
     // To click in web element
-    public void click(WebElement ele) {
+    public boolean click(WebElement ele) {
         try {
             ele.click();
-        } catch (Exception ignored) {
+            return true;
+        } catch (Exception e) {
+            return false;
         }
-        ;
     }
 
     // To get text in web element

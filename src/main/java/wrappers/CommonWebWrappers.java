@@ -43,7 +43,7 @@ public class CommonWebWrappers extends CommonNativeWrappers {
                 dc.setCapability("forceAppLaunch", true);
                 dc.setCapability("shouldTerminateApp", true);
             }
-            URI uri = new URI("http://0.0.0.0:4723");
+            URI uri = new URI(serverURL);
             if (platformName.equalsIgnoreCase("Android")) {
                 dc.setCapability("automationName", "UiAutomator2");
                 driver = new AndroidDriver(uri.toURL(), dc);
