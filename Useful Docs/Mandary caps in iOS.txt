@@ -1,0 +1,32 @@
+Mandatory desired capabilities for iOS
+
+Purpose --> Just to create a session with mobile
+1. platformName --> iOS
+2. automationName --> XCUITest
+3. deviceName --> Exact match of Simulator/Device Name or any value if UDID capability is passed
+4. udid --> UDID of device if more/no device found with that device name (optional/based on the device name)
+5. platformVersion --> say 17.0 (Optional --> Only for Simulator if there are multiple devices with same name and different OS)
+
+Purpose --> Create a session with mobile, install the given app and launch the same
+1. platformName --> iOS
+2. automationName --> XCUITest
+3. deviceName --> Exact match of Simulator/Device Name or any value if UDID capability is passed
+4. udid --> UDID of device if more/no device found with that device name (optional/based on the device name)
+5. platformVersion --> say 17.0 (Optional --> Only for Simulator if there are multiple devices with same name and different OS)
+6. app --> Path of the APP/IPA file in local machine
+
+Purpose --> Create a session with mobile and launch the app that is already installed
+1. platformName --> iOS
+2. automationName --> XCUITest
+3. deviceName --> Exact match of Simulator/Device Name or any value if UDID capability is passed
+4. udid --> UDID of device if more/no device found with that device name (optional/based on the device name)
+5. platformVersion --> say 17.0 (Optional --> Only for Simulator if there are multiple devices with same name and different OS)
+6. bundleId --> Name of the app given by developer
+
+Purpose --> Create a session with mobile, launch safari browser
+1. platformName --> iOS
+2. automationName --> XCUITest
+3. deviceName --> Exact match of Simulator/Device Name or any value if UDID capability is passed
+4. udid --> UDID of device if more/no device found with that device name (optional/based on the device name)
+5. platformVersion --> say 17.0 (Optional --> Only for Simulator if there are multiple devices with same name and different OS)
+6. browserName --> Safari
