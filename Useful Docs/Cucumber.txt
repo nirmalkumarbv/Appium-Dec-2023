@@ -1,0 +1,85 @@
+Cucumber
+
+Rules
+1. Project with Feature file
+2. Step Defined
+3. Automation library
+
+Manual Testing
+Test Suite
+	Test Scenarios
+		Test Cases
+			Test steps
+
+TestNG
+Suite
+	Test
+		Class
+			Method
+
+Cucumber
+Project
+	Feature
+		Scenario
+			Steps
+
+Manual cases
+
+Pre condition
+
+S.No	Step	ExpectedResult
+
+Gherkin Keywords
+Given --> Pre-Condition
+When --> Action/Step to be perform
+Then --> Expected Result
+And --> Supporting Keyword for all others
+But --> ExpectedResult for negative condition
+* --> Wild Card (any)
+
+Maven project
+src/main/java 
+	stepDef
+		StepDef.java
+			public static AppiumDriver driver;
+			@Given("the app is launched")
+			public void a() {Desired....}
+	
+			@Given("I enter the username as {string}")
+			public void b(String un) {driver.fin.....(By.id("aa")).sendKeys(un);}
+	
+			@Given("I enter the password as {string}")
+			public void c(String pwd) {driver.fin.....(By.id("ava")).sendKeys(pwd);}
+
+			@Given("I click login button")
+			public void d() {driver.fin.....(By.id("aa")).click();}
+
+			@Given("Verify Home page is displayed")
+			public void e() {driver.fin.....(By.id("aa")).isDisplayed();}
+src/main/resources
+src/test/java
+	runner
+		TestRunner.java
+		@CucumberOptions(features={"src/test/resources/features"}, glue={"stepDef"})
+
+		public class TestRunner() extends AbstractTestNGCucumberTests{}
+src/test/resources 
+	features
+		<file name>.feature
+		Feature: <Scenario name>
+
+		Scenario: <TC name>
+		<Gherkin keyword> <Steps>
+
+		Login.feature
+		Feature: Login funtionality
+
+		Scenario: Login with valid credentials
+		Given the app is launched
+		When I enter the username as "vvvv"
+		And I enter the password as "dfg"
+		And I click login button
+		Then Verify Home page is displayed
+			
+
+		

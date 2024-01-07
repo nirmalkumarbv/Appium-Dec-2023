@@ -1,0 +1,116 @@
+Page Object Model 
+
+Rules
+1. Every page should be a separate class 
+2. Every method should have a return type and it should return to the page it lands post completion of that method
+3. Every action should be a separate method in that page
+4. Verify the page it has been landed
+5. Reusable methods should be a placed in a separate class
+
+Maven project
+src/main/java --> supporting files to run your testcases
+src/main/resources --> supporting files that are needed for src/main/java
+src/test/java --> test cases
+src/test/resources --> supporting files that are needed for src/test/java
+
+Maven project
+src/main/java
+	wrappers
+		GenericWrappers.java
+			public AppiumDriver driver;
+			public void launchApp(..............
+			public void clickEle(............
+		XYZProjectSpecificWrappers.java extends GenericWrappers
+			@BeforeMethod
+			public void bm() {
+			launchApp(.....
+			}
+			@AfterMethod
+			public void am() {
+			closeApp();
+			}			
+
+	pages
+		LoginPage.java extends GenericWrappers
+			public LoginPage(AppiumDriver driver) {
+			this.driver = driver;
+			verify any unique element of page (or) verify activity }
+			public LoginPage enterUsername(........ return this;
+			public void enterPassword(....... return this;
+			public void clickLogin(......... return new HomePage(driver);
+			public void clickLoginForFailureCases(......... return this;
+			public void clearUsername(........ return this;
+			public void clearPassword(....... return this;
+
+		HomePage.java
+			public HomePage(AppiumDriver driver) {
+			this.driver = driver;
+			verify any unique element of page (or) verify activity }
+			public void verifyHomePage(....... return this;
+src/main/resources
+src/test/java
+	testCases
+		TC001.java extends XYZProjectSpecificWrappers.java 
+			@Test
+			public void runScript(){
+			new LoginPage(driver).clearUsername().enterUsername("a@b.com").clearPassword().enterPassword("aaa").clickLogin().verifyHomePage();
+			}
+		TC002.java extends XYZProjectSpecificWrappers.java 
+			@Test
+			public void runScript(){
+			new LoginPage(driver).clearUsername().enterUsername("a@b.com").clearPassword().enterPassword("aaa").clickLogin().verifyHomePage();
+			}
+src/test/resources
+
+
+
+
+
+
+
+
+
+
+Below are sample reference
+
+TestNG XML structure
+<xml....
+	<suite ....>
+		<test...
+			<classes>
+				<class name...../>
+			</classes>
+		</test>
+	</suite>
+
+
+BeforeSuite
+	BeforeTest
+		BeforeClass
+			BeforeMethod
+				@Test/Method
+			AfterMethod
+		AfterClass					
+	AfterTest
+AfterSuite
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

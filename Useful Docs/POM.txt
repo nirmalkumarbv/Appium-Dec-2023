@@ -1,0 +1,116 @@
+Page Object Model 
+
+Rules
+1. Every page should be a separate class 
+2. Every method should have a return type and it should return to the page it lands post completion of that method
+3. Every action should be a separate method in that page
+4. Verify the page it has been landed
+5. Reusable methods should be a placed in a separate class
+
+Maven project
+src/main/java --> supporting files to run your testcases
+src/main/resources --> supporting files that are needed for src/main/java
+src/test/java --> test cases
+src/test/resources --> supporting files that are needed for src/test/java
+
+Maven project
+src/main/java
+	wrappers
+		GenericWrappers.java
+			public static AppiumDriver driver;
+			public void launchApp(..............
+			public void clickEle(............
+
+	pages
+		LoginPage.java extends GenericWrappers
+			public LoginPage() {verify any unique element of page (or) verify activity }
+			public LoginPage enterUsername(........ return this;
+			public void enterPassword(....... return this;
+			public void clickLogin(......... return new HomePage();
+			public void clickLoginForFailureCases(......... return this;
+			public void clearUsername(........ return this;
+			public void clearPassword(....... return this;
+
+		HomePage.java
+			public HomePage() {verify any unique element of page (or) verify activity }
+			public void verifyHomePage(....... return this;
+src/main/resources
+src/test/java
+	testCases
+		TC001.java
+			public static void main(String[] args) {
+			GenericWrappers gm = new GenericWrappers();
+			gm.launchApp(.....
+			new LoginPage().clearUsername().enterUsername("a@b.com").clearPassword().enterPassword("aaa").clickLogin().verifyHomePage();
+			gm.closeApp();
+			}
+src/test/resources
+
+
+
+
+
+
+
+
+
+
+Below are sample reference
+
+UserDetails.properties
+UserName.Xpath = vvv
+
+
+UserDetails_Android.properties
+UserName.Xpath = vvv
+
+UserDetails_iOS.properties
+UserName.Xpath = xxx
+
+
+
+Properties prop;
+prop.load("UserDetails.properties");
+
+driver.getCapa..().getCapability("platformName");
+
+
+@AndroidFindBy(xpath="ccc")
+@iOSXCUITFindBy(xpath="vvv")
+public WebElement a;
+
+
+public LoginPage enterUsername() {
+enterValue(getWebElement("xpath","//vvv"),"LOkesh");
+enterValue(getWebElement("xpath",prop.get("UserName.Xpath"),"LOkesh");
+
+return this;
+}
+
+public void clearUsername() {
+clearValue(getWebElement("xpath","//vvv"));
+clearValue(getWebElement("xpath",prop.get("UserName.Xpath"));
+return this;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

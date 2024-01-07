@@ -1,0 +1,104 @@
+Cucumber
+
+Rules
+1. Project with Feature file
+2. Step Defined
+3. Automation library
+
+Page Object Model 
+
+Rules
+1. Every page should be a separate class 
+2. Every method should have a return type and it should return to the page it lands post completion of that method
+3. Every action should be a separate method in that page
+4. Verify the page it has been landed
+5. Reusable methods should be a placed in a separate class
+
+Manual Testing
+Test Suite
+	Test Scenarios
+		Test Cases
+			Test steps
+
+TestNG
+Suite
+	Test
+		Class
+			Method
+
+Cucumber
+Project
+	Feature
+		Scenario
+			Steps
+
+Manual cases
+
+Pre condition
+
+S.No	Step	ExpectedResult
+
+Gherkin Keywords
+Given --> Pre-Condition
+When --> Action/Step to be perform
+Then --> Expected Result
+And --> Supporting Keyword for all others
+But --> ExpectedResult for negative condition
+* --> Wild Card (any)
+
+Maven project
+src/main/java 
+	wrappers
+		GenericWrappers.java extends AbstractTestNGCucumberTests
+			public static ThreadLocal<AppiumDriver> driver = new ThreadLocal<AppiumDriver>();
+			public void launchApp(..............driver.set(new AndroidDriver(url,cap);
+			public void clickEle(............driver.get().find.....click();
+	pages
+		LoginPage.java extends GenericWrappers
+			public LoginPage() {
+			verify any unique element of page (or) verify activity }
+			@Given("I enter the username as {string}")
+			public LoginPage enterUsername(........ return this;
+			@Given("I enter the password as {string}")
+			public void enterPassword(....... return this;
+			@Given("I click login button")
+			public void clickLogin(......... return new HomePage(driver);
+			public void clickLoginForFailureCases(......... return this;
+			public void clearUsername(........ return this;
+			public void clearPassword(....... return this;
+
+		HomePage.java
+			public HomePage() {
+			verify any unique element of page (or) verify activity }
+			@Given("Verify Home page is displayed")
+			public void verifyHomePage(....... return this;	
+
+src/main/resources
+src/test/java
+	runner
+		TestRunner.java
+		@CucumberOptions(features={"src/test/resources/features"}, glue={"pages"})
+
+		public class TestRunner() extends GenericWrappers {
+			@BeforeMethod
+			public void bm() {
+			launchApp(.....
+			}
+			@AfterMethod
+			public void am() {
+			closeApp();
+			}
+		}
+src/test/resources 
+	features
+		Login.feature
+		Feature: Login funtionality
+
+		Scenario: Login with valid credentials
+		When I enter the username as "vvvv"
+		And I enter the password as "dfg"
+		And I click login button
+		Then Verify Home page is displayed
+			
+
+		
