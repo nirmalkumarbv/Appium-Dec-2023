@@ -31,7 +31,7 @@ Challenges in Appium
 19. If object is created using AndroidDriver or IOSDriver then the platformName cap should not be provided in code
 20. If I switch the context the implicit wait duration is reset to 0
 21. isKeyboardShown will return false if the on screen keyboard is a numeric keyboard
-22. Appium can automate only visible portion of the screen
+22. Appium can automate only visible portion of the screen in case of Native View
 23. activateApp method can fail if the appActivity in manifest doesnot have permission
 24. Phone should be connected via USB cable while perform Wi-Fi & Mobile Data on/off scenarios
 25. Physical keyboard actions like Keys.Enter will not be working in WebView. In Android, native android keys layout is used. In iOS switch to native view and click the key in Phone keyboard layout via code
@@ -44,11 +44,14 @@ Challenges in Appium
 32. If session is created as an App (Native/Hybrid), then we can switch between Native, WebView in App , WebView in Mobile App
 33. While performing swipe using PointerInput in iOS, there are chances that element in start position gets clicked (may work sometimes)
 34. Swipe within WebElement using pointer input might not work in PickerWheel of iOS (may work sometimes)
-35. While using selectPickerWheelValue in executeScript command, update the value based on the screen size else it would end up in multiple value swipe or next/previous element would not be selected.
-36. WebView value in iOS may change. So hardcoded value might not work
-37. In iOS, only the visible portion of screen can be used for WebView
+35. While using selectPickerWheelValue in executeScript command, update the offset value based on the screen size else it would end up in multiple value swipe or next/previous element would not be selected.
+36. WebView value in iOS may not be identified in 1st time and will change. So hardcoded value might not work
+37. In iOS, older versions of Appium only the visible portion of screen can be used for WebView
 38. I need to view the screen for WebView automation. To identify the locators, I need the device connected in local machine for interaction
 39. For WebView in both platform, I cannot use cloud providers
-40. If noReset is set as true, then the app will not kill and restart for every session in iOS. Solution is to terminate and relaunch everytime or call driver.terminateApp() method
+40. If noReset is set as true, then the app will not kill and restart for every session. 
+Solution 1: terminate and relaunch everytime or call driver.terminateApp() method at the end of the session. driver.terminateApp() and driver.activateApp() method at the start of the session
+Solution 2: forceAppLaunch capability set as TRUE to kill and relaunch the app every time the session starts
+shouldTerminateApp capability set as TRUE to kill the app every time the session ends
 41. In iOS, we need to use keyboard operation as NATIVE view only
-42. If the name of the finger is similar in PointerInput object creation, then multiple finger will not work
+42. If the same name of the input/finger is similar in PointerInput object creation, then multiple finger/input will not work
